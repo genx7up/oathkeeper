@@ -134,5 +134,9 @@ func (h *DecisionHandler) decisions(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set(k, s.Header.Get(k))
 	}
 
-	w.WriteHeader(http.StatusOK)
+	if r.Method == "HEAD" {
+		w.WriteHeader(http.StatusNoContent)
+	} else {
+		w.WriteHeader(http.StatusOK)
+	}
 }
